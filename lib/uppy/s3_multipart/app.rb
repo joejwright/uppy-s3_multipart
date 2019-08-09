@@ -40,7 +40,7 @@ module Uppy
           r.post ["", true] do
             content_type = r.params["type"]
             filename     = r.params["filename"]
-            key          = r.params["key"]
+            key          = r.params["metadata"]["key"]
 
             #extension = File.extname(filename.to_s)
             #key       = SecureRandom.hex + extension
