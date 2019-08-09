@@ -40,9 +40,10 @@ module Uppy
           r.post ["", true] do
             content_type = r.params["type"]
             filename     = r.params["filename"]
+            key          = r.params["key"]
 
-            extension = File.extname(filename.to_s)
-            key       = SecureRandom.hex + extension
+            #extension = File.extname(filename.to_s)
+            #key       = SecureRandom.hex + extension
             key       = "#{opts[:prefix]}/#{key}" if opts[:prefix]
 
             content_disposition = ContentDisposition.inline(filename) if filename
