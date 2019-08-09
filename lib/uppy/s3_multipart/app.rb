@@ -2,6 +2,7 @@ require "uppy/s3_multipart/client"
 
 require "roda"
 require "content_disposition"
+require "pry"
 
 require "securerandom"
 
@@ -38,12 +39,17 @@ module Uppy
         route do |r|
           # POST /s3/multipart
           r.post ["", true] do
+
             content_type = r.params["type"]
             filename     = r.params["filename"]
-            key          = r.params["metadata"]["key"]
 
-            #extension = File.extname(filename.to_s)
-            #key       = SecureRandom.hex + extension
+            if r.params["metadata"]["key"]
+              key          = r.params["metadata"]["key"]
+            else
+              extension = File.extname(filename.to_s)
+              key       = SecureRandom.hex + extension
+            end
+
             key       = "#{opts[:prefix]}/#{key}" if opts[:prefix]
 
             content_disposition = ContentDisposition.inline(filename) if filename
