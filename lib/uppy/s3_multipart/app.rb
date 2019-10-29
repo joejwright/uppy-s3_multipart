@@ -2,7 +2,6 @@ require "uppy/s3_multipart/client"
 
 require "roda"
 require "content_disposition"
-require "pry"
 
 require "securerandom"
 
